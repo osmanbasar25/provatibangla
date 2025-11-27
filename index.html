@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রভাতী বাংলা</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons --><script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Tailwind Configuration and Inter Font */
+        :root {
+            /* Primary: Deep Orange/Red from Logo */
+            --primary-color: #e6520e; 
+            /* Accent: Green from Logo */
+            --accent-color: #38a169; 
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc; /* Light background */
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Animation for background gradient (Sunrise Theme) */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-gradient {
+            /* Light Yellow -> Gold -> Orange (Matching Provati/Sunrise theme) */
+            background: linear-gradient(-45deg, #fefce8, #fcd34d, #f97316); 
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        /* Subtle Fade-in Animation for sections */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Blinking cursor for typewriter effect */
+        .typewriter-text::after {
+            content: '|';
+            display: inline-block;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Responsive styling for the mobile menu */
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 500px; /* Arbitrarily large enough height */
+        }
+
+        /* Image gallery specific styles for hover effect */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem; /* Rounded-xl */
+            cursor: pointer; /* Indicate clickable */
+        }
+
+        .gallery-item img {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Modal styling */
+        .lightbox-modal {
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+        }
+        .lightbox-content {
+            max-height: 90vh;
+            max-width: 90vw;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar --><header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Brand (using the uploaded image) -->
+            <a href="#" class="inline-block">
+                <img src="assets/logo.jpeg"
+                     alt="Provati Bangla Logo" 
+                     class="h-12 w-auto object-contain">
+            </a>
+            
+            <!-- Desktop Navigation --><nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#home" class="text-gray-600 hover:text-[var(--primary-color)] transition duration-300">হোম</a>
+                <a href="#courses" class="text-gray-600 hover:text-[var(--primary-color)] transition duration-300">কোর্স</a>
+                <a href="#gallery" class="text-gray-600 hover:text-[var(--primary-color)] transition duration-300">গ্যালারি</a>
+                <a href="#about" class="text-gray-600 hover:text-[var(--primary-color)] transition duration-300">সম্পর্কিত</a>
+                <a href="#contact" class="text-gray-600 hover:text-[var(--primary-color)] transition duration-300">যোগাযোগ</a>
+            </nav>
+
+            <!-- Mobile Menu Button --><button id="menu-button" class="md:hidden text-gray-700 hover:text-[var(--primary-color)] p-2 rounded-lg transition duration-300">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) --><nav id="mobile-menu" class="md:hidden bg-gray-50 border-t border-gray-200">
+            <a href="#home" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 transition duration-150 border-b">Home</a>
+            <a href="#courses" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 transition duration-150 border-b">Courses</a>
+            <a href="#gallery" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 transition duration-150 border-b">Gallery</a>
+            <a href="#about" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 transition duration-150 border-b">About</a>
+            <a href="#contact" class="block py-3 px-6 text-gray-700 hover:bg-gray-100 transition duration-150">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Enrollment Marquee (Sticky to draw attention) -->
+    <!-- FIX: Updated top from 4rem to 5rem to correctly position it directly below the header (h-12 + py-4 = 5rem total height) -->
+    <div class="bg-red-600 text-white py-2 overflow-hidden sticky z-40" style="top: 5rem;"> 
+        <marquee class="text-lg font-bold">
+            <span class="text-yellow-300 mr-8">***</span> ভর্তি চলছে! সীমিত আসন, দ্রুত যোগাযোগ করুন! <span class="text-yellow-300 ml-8">***</span>
+            <span class="text-yellow-300 mr-8">***</span> ভর্তি চলছে! সীমিত আসন, দ্রুত যোগাযোগ করুন! <span class="text-yellow-300 ml-8">***</span>
+        </marquee>
+    </div>
+
+    <main>
+        <!-- Hero Section --><section id="home" class="hero-gradient py-20 sm:py-32 lg:py-40 text-center flex items-center justify-center min-h-[70vh]">
+            <div class="container mx-auto px-4 fade-in-section" data-delay="0">
+                
+                <!-- Director Info Block -->
+                <div class="mb-8 p-4 bg-white/50 backdrop-blur-sm rounded-xl inline-block shadow-lg">
+                    <img src="assets/sir.png"Md Muksud Wahid" 
+                         class="rounded-full w-28 h-28 mx-auto object-cover shadow-xl border-4 border-white">
+                    <p class="text-xl font-bold text-gray-900 mt-4 mb-1">মোঃ ওয়াহিদুজ্জামান</p>
+                    <p class="text-sm text-gray-700 max-w-sm mx-auto font-medium">
+                        বি.এ. অনার্স. এম.এ (বাংলা) | সহকারী শিক্ষক, বাংলা, গ্রিন ভিউ হাই স্কুল, চাঁপাইনবাবগঞ্জ
+                    </p>
+                </div>
+                <!-- End Director Info Block -->
+                
+                <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black text-gray-900 mb-4">
+                    প্রভাতী বাংলা
+                </h1>
+                <p class="text-xl sm:text-2xl lg:text-3xl font-light text-gray-700 mb-8 h-8">
+                    <span id="typewriter-output" class="typewriter-text text-[var(--accent-color)] font-semibold"></span>
+                </p>
+                <div class="space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#courses" class="inline-block bg-[var(--primary-color)] hover:bg-[#d94a0a] text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
+                        Explore Courses
+                    </a>
+                    <a href="#contact" class="inline-block bg-white border-2 border-[var(--primary-color)] text-[var(--primary-color)] font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notice Section 1: Admission Announcement --><section class="py-12 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+                <div class="flex flex-col md:flex-row items-center bg-white p-6 rounded-xl shadow-xl border-t-4 border-[var(--primary-color)] fade-in-section" data-delay="100">
+                    <img src="assets/1.jpeg"
+                         alt="Admission Notice" 
+                         class="w-full md:w-1/3 h-auto object-cover rounded-lg mb-4 md:mb-0 md:mr-6">
+                    <div class="md:w-2/3">
+                        <h3 class="text-3xl font-bold text-[var(--primary-color)] mb-3">নতুন ব্যাচে ভর্তি চলছে!</h3>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            আমাদের সকল কোর্সের জন্য নতুন ব্যাচে সীমিত সংখ্যক ছাত্র-ছাত্রী ভর্তি করা হচ্ছে। আপনার সন্তানের উজ্জ্বল ভবিষ্যতের জন্য আজই যোগাযোগ করুন। প্রতিটি কোর্সে মানসম্মত শিক্ষা নিশ্চিত করা হয়।
+                        </p>
+                        <a href="#contact" class="mt-4 inline-block bg-[var(--accent-color)] hover:bg-[#2b8852] text-white font-semibold py-2 px-6 rounded-full transition duration-300">
+                            বিস্তারিত জানতে যোগাযোগ করুন
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section --><section id="courses" class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in-section" data-delay="100">
+                    <h2 class="text-4xl font-extrabold text-gray-800 mb-3">আমাদের কোর্সসমূহ</h2>
+                    <p class="text-xl text-gray-500">Basic থেকে উচ্চ দক্ষতা।</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Course Card 1: SSC/HSC Prep --><div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 fade-in-section" data-delay="300">
+                        <div class="text-[var(--primary-color)] mb-4"><i data-lucide="book-open-text" class="w-8 h-8"></i></div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">এসএসসি এবং এইচএসসির বিস্তৃত প্রোগ্রাম </h3>
+                        <p class="text-gray-600 mb-4">বিজ্ঞান, মানবিক এবং ব্যবসায় শিক্ষার জন্য সম্পূর্ণ বাংলা কভারেজ</p>
+                        <ul class="text-sm text-gray-500 space-y-1 list-disc list-inside">
+                            <li>সাপ্তাহিক মক টেস্ট এবং পারফরম্যান্স বিশ্লেষণ।</li>
+                            <li>ব্যক্তিগতকৃত Doubt Solving Session।</li>
+                        </ul>
+                    </div>
+
+                    <!-- Course Card 2: Bangla & English Foundation --><div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 fade-in-section" data-delay="500">
+                        <div class="text-[var(--accent-color)] mb-4"><i data-lucide="languages" class="w-8 h-8"></i></div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">বাংলা (ষষ্ঠ-অষ্টম)</h3>
+                        <p class="text-gray-600 mb-4">একটি শক্তিশালী একাডেমিক ভিত্তির জন্য ব্যাকরণ, সৃজনশীল লেখা এবং কথ্য সাবলীলতার উপর মনোযোগ</p>
+                        <ul class="text-sm text-gray-500 space-y-1 list-disc list-inside">
+                            <li>বাংলা সাহিত্যের গভীর উপলব্ধি।</li>
+                            <li>কার্যকর যোগাযোগ দক্ষতা বিকাশ।</li>
+                        </ul>
+                    </div>
+
+                    <!-- Course Card 3: Admission Test Prep --><div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 fade-in-section" data-delay="700">
+                        <div class="text-red-600 mb-4"><i data-lucide="graduation-cap" class="w-8 h-8"></i></div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-2">Home Turoring Service</h3>
+                        <p class="text-gray-600 mb-4">বাসায় ব্যাক্তিগতভাবে পড়ার সুবিধা</p>
+                        <ul class="text-sm text-gray-500 space-y-1 list-disc list-inside">
+                            <li>সময়ের মধ্যে সিলেবাস শেষ করার নিশ্চয়তা </li>
+                            <li>বিশেষ পরীক্ষার ব্যবস্থা </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section --><section id="gallery" class="py-16 sm:py-24 bg-gray-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 fade-in-section" data-delay="100">
+                    <h2 class="text-4xl font-extrabold text-gray-800 mb-3">আমাদের গ্যালারি</h2>
+                    <p class="text-xl text-gray-500">আমাদের প্রাণবন্ত শিক্ষার পরিবেশের কিছু ঝলক। যেকোনো ছবিতে ক্লিক করে এটিকে বড় করুন।</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- Gallery Items (11 total) -->
+                    <div class="gallery-item fade-in-section" data-delay="100"><img src="assets/1.jpeg"Class Photo 1" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="200"><img src="assets/2.jpeg"Study Group 2" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="300"><img src="assets/3.jpeg"aalt="Exam Time 3" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="400"><img src="assets/4.jpeg" alt="Lecture 4" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="500"><img src="assets/5.jpeg" alt="Seminar 5" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="600"><img src="assets/6.jpeg" alt="Students 6" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="700"><img src="assets/7.jpeg" alt="Class Photo 7" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="800"><img src="assets/8.jpeg" alt="Discussion 8" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="900"><img src="assets/9.jpeg" alt="Lab Work 9" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="1000"><img src="assets/10.jpeg" alt="Director 10" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                    <div class="gallery-item fade-in-section" data-delay="1100"><img src="assets/11.jpeg" alt="Certificate 11" class="w-full h-auto object-cover rounded-xl shadow-md" onclick="openLightbox(this)"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section --><section id="about" class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12 fade-in-section" data-delay="100">
+                        <h2 class="text-4xl font-extrabold text-gray-800 mb-3">আমাদের সম্পর্কে</h2>
+                        <p class="text-xl text-gray-500">মানসম্মত শিক্ষার প্রতিশ্রুতি।</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 md:p-12 rounded-2xl shadow-xl fade-in-section" data-delay="300">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            প্রভাতী বাংলা প্রতিটি শিক্ষার্থীর চাহিদা অনুযায়ী উচ্চমানের, ব্যক্তিগতকৃত শিক্ষা প্রদানের জন্য নিবেদিতপ্রাণ। আমরা বিশ্বাস করি যে প্রকৃত শিক্ষা আসে দৃঢ় মৌলিক বিষয় এবং অবিরাম প্রেরণা থেকে। আমাদের লক্ষ্য কেবল শিক্ষার্থীদের পরীক্ষায় উত্তীর্ণ হতে সাহায্য করা নয়, বরং তাদের মধ্যে শেখার প্রতি আজীবন ভালোবাসা জাগিয়ে তোলা।
+                        </p>
+                        <blockquote class="border-l-4 border-[var(--primary-color)] pl-4 italic text-gray-600">
+                            "জ্ঞান যেখানে সীমাবদ্ধ, বুদ্ধি সেখানে আড়ষ্ট, মুক্তি সেখানে অসম্ভব"
+                        </blockquote>
+
+                        <div class="mt-8 pt-6 border-t border-gray-200 flex items-center">
+                            <!-- Director's Photo in About Section -->
+                            <img src= "assets/sir.png" alt="Md Muksud Wahid" 
+                                 class="rounded-full w-20 h-20 object-cover mr-6 shadow-md border-2 border-[var(--primary-color)]">
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-800 mb-2">পরিচালক</h4>
+                                <p class="text-sm text-gray-700 font-medium">B.A Hon's. M.A (Bangla) | Assistant Teacher, Bengali literature at Green View High School, Chapainawabganj</p>
+                                <p class="text-lg text-gray-700 mt-2">
+                                    <span class="font-bold">মোঃ ওয়াহিদুজ্জামান 
+</span>, প্রভাতি বাংলার স্বপ্নদ্রষ্টা, আমাদের কোচিং পদ্ধতিগুলি কার্যকর, নীতিগত এবং শিক্ষার্থীদের সাফল্যের উপর দৃষ্টি নিবদ্ধ করে তা নিশ্চিত করেন। তাঁর নির্দেশনা আমাদের প্রতিষ্ঠানের একাডেমিক উৎকর্ষতার প্রতিশ্রুতির ভিত্তিপ্রস্তর।
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Notice Section 2: Important Event / Achievement --><section class="py-12 bg-gray-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+                <div class="flex flex-col md:flex-row-reverse items-center bg-white p-6 rounded-xl shadow-xl border-t-4 border-[var(--accent-color)] fade-in-section" data-delay="100">
+                    <img src= "assets/w.jpeg"
+                         alt="Important Achievement" 
+                         class="w-full md:w-1/3 h-auto object-cover rounded-lg mb-4 md:mb-0 md:ml-6">
+                    <div class="md:w-2/3 md:pr-6">
+                        <h3 class="text-3xl font-bold text-[var(--accent-color)] mb-3">সাফল্যের খবর!</h3>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            গত বছরের SSC পরীক্ষায় আমাদের কোচিংয়ের ৪০ জন শিক্ষার্থী জিপিএ-৫ পেয়েছে। কঠোর পরিশ্রম এবং সঠিক নির্দেশনার ফল এটি। আমরা আগামীতেও এই ধারা বজায় রাখতে বদ্ধপরিকর।
+                        </p>
+                        <a href="#gallery" class="mt-4 inline-block bg-[var(--primary-color)] hover:bg-[#d94a0a] text-white font-semibold py-2 px-6 rounded-full transition duration-300">
+                            আমাদের সাফল্য দেখুন
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section --><section id="contact" class="py-16 sm:py-24">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12 fade-in-section" data-delay="100">
+                        <h2 class="text-4xl font-extrabold text-gray-800 mb-3">যোগাযোগ</h2>
+                        <p class="text-xl text-gray-500">আপনার আসন নিশ্চিত করতে যোগাযোগ করুন.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-8 md:p-12 rounded-2xl shadow-xl flex flex-col lg:flex-row gap-8 fade-in-section" data-delay="300">
+                        <!-- Contact Info --><div class="lg:w-1/2 space-y-6">
+                            <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-4">যোগাযোগের ঠিকানা</h3>
+                            <div class="flex items-start space-x-3">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-[var(--primary-color)] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-gray-700">ঠিকানা:</p>
+                                    <p class="text-gray-600">কাঁঠাল বাগিচা, চাঁপাইনবাবগঞ্জ</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i data-lucide="phone" class="w-6 h-6 text-[var(--primary-color)] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-gray-700">Phone:</p>
+                                    <p class="text-gray-600">+8801331463136</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <i data-lucide="mail" class="w-6 h-6 text-[var(--primary-color)] flex-shrink-0 mt-1"></i>
+                                <div>
+                                    <p class="font-medium text-gray-700">Email:</p>
+                                    <p class="text-gray-600">mdwahiduzzaman@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form --><div class="lg:w-1/2">
+                            <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-4">বার্তা পাঠান</h3>
+                            <form id="contact-form" class="space-y-4">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] transition duration-150">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your Email Address</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] transition duration-150">
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Your Query</label>
+                                    <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] transition duration-150"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-[var(--accent-color)] hover:bg-[#2b8852] text-white font-bold py-3 rounded-lg shadow-md transform hover:scale-[1.01] transition duration-300">
+                                    Send Message
+                                </button>
+                                <p id="form-message" class="text-center mt-2 hidden text-sm"></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Lightbox Modal for Gallery -->
+    <div id="lightbox-modal" class="lightbox-modal fixed inset-0 hidden items-center justify-center p-4">
+        <div class="relative">
+            <!-- Close Button -->
+            <button class="absolute top-4 right-4 text-white hover:text-gray-300 transition duration-150" onclick="closeLightbox()">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <!-- Image -->
+            <img id="lightbox-image" class="lightbox-content rounded-lg shadow-2xl" src="" alt="Expanded Gallery Image">
+        </div>
+    </div>
+
+    <!-- Footer --><footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-lg font-semibold mb-2">প্রভাতী বাংলা</p>
+            <p class="text-sm mb-4">"শিক্ষাগত সাফল্যের পথ আলোকিত করার জন্য নিবেদিতপ্রাণ।"</p>
+            <p class="text-xs text-gray-400">&copy; 2025 Provati Bangla. All rights reserved.</p>
+            <p class="text-xs text-gray-400 mt-1">Director:মোঃ ওয়াহিদুজ্জামান </p>
+        </div> <br>
+        <p class="text-xs text-gray-400 mt-1" style="text-align: right; margin-right: 12px;" >Made with 💕&☕ by <a href="https://www.facebook.com/emailosman" target="_blank" style="color: #fcd34d; "><b>Osman</b></a> </p>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // --- JavaScript for Interactivity and Animations ---
+
+        // 1. Typewriter Effect
+        const slogan = "শিক্ষার আলোয় আলোকিত ভবিষ্যৎ"; // A future illuminated by the light of education.
+        const outputElement = document.getElementById('typewriter-output');
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < slogan.length) {
+                outputElement.textContent += slogan.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100); // Typing speed in milliseconds
+            }
+        }
+        
+        // 2. Intersection Observer for Fade-in Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('fade-in-active');
+                    }, delay);
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 3. Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu after clicking a link
+                document.getElementById('mobile-menu').classList.remove('open');
+            });
+        });
+
+        // 4. Mobile Menu Toggle
+        document.getElementById('menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        });
+
+        // 5. Contact Form Submission (Mock)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formMessage = document.getElementById('form-message');
+            
+            // Simple validation and mock submission feedback
+            formMessage.classList.remove('hidden', 'text-red-500', 'text-green-500');
+            formMessage.textContent = 'Sending message...';
+
+            setTimeout(() => {
+                // Simulate success
+                formMessage.textContent = 'Thank you! Your message has been sent successfully.';
+                formMessage.classList.add('text-green-500');
+                
+                // Clear the form
+                this.reset();
+            }, 1500); // 1.5 second delay to simulate API call
+
+            formMessage.classList.remove('hidden');
+        });
+
+        // 6. Lightbox/Modal Functionality
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+
+        function openLightbox(imgElement) {
+            lightboxImage.src = imgElement.src;
+            lightboxModal.classList.remove('hidden');
+            lightboxModal.classList.add('flex');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        }
+
+        function closeLightbox() {
+            lightboxModal.classList.add('hidden');
+            lightboxModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        // Close lightbox when clicking outside the image
+        lightboxModal.addEventListener('click', (e) => {
+            if (e.target === lightboxModal) {
+                closeLightbox();
+            }
+        });
+
+        // Start the typewriter effect when the window loads
+        window.addEventListener('load', () => {
+            typeWriter();
+        });
+    </script>
+
+</body>
+</html>
