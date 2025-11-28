@@ -107,9 +107,9 @@ body {
     display: block; 
 }
 
-/* 3. Style the "Show More" button */
+/* 3. Style the "Show More" button (Made to look cool like the other buttons) */
 #showMoreButton {
-    /* Use Tailwind classes for quick styling, since Tailwind is loaded */
+    /* Uses the Tailwind @apply directive to match the primary button style */
     @apply 
         bg-[var(--primary-color)] hover:bg-[#d94a0a] text-white 
         font-bold py-3 px-8 rounded-full shadow-lg transform 
@@ -119,6 +119,6 @@ body {
 
 /* 4. Hide the "Show More" button when the 'show-all' class is active */
 .gallery-container.show-all + #showMoreButton {
-    /* The button will only show if the element before it is NOT show-all */
+    /* The button will be hidden by this CSS rule after the JS adds 'show-all' */
     display: none;
 }
