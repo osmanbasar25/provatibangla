@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>প্রভাতী বাংলা</title>
     <link rel="icon" href="assets/icon.jpg" />
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,16 +14,13 @@
       rel="stylesheet"
     />
 
-    <!-- Linked CSS File -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Navigation Bar -->
     <header class="sticky top-0 z-50 bg-white shadow-md">
       <div
         class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"
       >
-        <!-- Logo/Brand (using the uploaded image) -->
         <a href="#" class="inline-block">
           <img
             src="assets/logo.jpeg"
@@ -34,7 +29,6 @@
           />
         </a>
 
-        <!-- Desktop Navigation -->
         <nav class="hidden md:flex space-x-8 text-lg font-medium">
           <a
             href="#home"
@@ -63,7 +57,6 @@
           >
         </nav>
 
-        <!-- Mobile Menu Button -->
         <button
           id="menu-button"
           class="md:hidden text-gray-700 hover:text-[var(--primary-color)] p-2 rounded-lg transition duration-300"
@@ -72,7 +65,6 @@
         </button>
       </div>
 
-      <!-- Mobile Menu (Hidden by default) -->
       <nav
         id="mobile-menu"
         class="md:hidden bg-gray-50 border-t border-gray-200"
@@ -105,8 +97,6 @@
       </nav>
     </header>
 
-    <!-- Enrollment Marquee (Sticky to draw attention) -->
-    <!-- FIX: Updated top from 4rem to 5rem to correctly position it directly below the header (h-12 + py-4 = 5rem total height) -->
     <div
       class="bg-red-600 text-white py-2 overflow-hidden sticky z-40"
       style="top: 5rem;"
@@ -120,13 +110,11 @@
     </div>
 
     <main>
-      <!-- Hero Section -->
       <section
         id="home"
         class="hero-gradient py-20 sm:py-32 lg:py-40 text-center flex items-center justify-center min-h-[70vh]"
       >
         <div class="container mx-auto px-4 fade-in-section" data-delay="0">
-          <!-- Director Info Block -->
           <div
             class="mb-8 p-4 bg-white/50 backdrop-blur-sm rounded-xl inline-block shadow-lg"
           >
@@ -143,8 +131,6 @@
               স্কুল, চাঁপাইনবাবগঞ্জ
             </p>
           </div>
-          <!-- End Director Info Block -->
-
           <h1
             class="text-5xl sm:text-7xl lg:text-8xl font-black text-gray-900 mb-4"
           >
@@ -175,7 +161,6 @@
         </div>
       </section>
 
-      <!-- Notice Section 1: Admission Announcement -->
       <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div
@@ -207,7 +192,6 @@
         </div>
       </section>
 
-      <!-- Courses Section -->
       <section id="courses" class="py-16 sm:py-24 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-12 fade-in-section" data-delay="100">
@@ -218,7 +202,6 @@
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Course Card 1: SSC/HSC Prep -->
             <div
               class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 fade-in-section"
               data-delay="300"
@@ -238,7 +221,6 @@
               </ul>
             </div>
 
-            <!-- Course Card 2: Bangla & English Foundation -->
             <div
               class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 fade-in-section"
               data-delay="500"
@@ -259,7 +241,6 @@
               </ul>
             </div>
 
-            <!-- Course Card 3: Admission Test Prep -->
             <div
               class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 fade-in-section"
               data-delay="700"
@@ -282,7 +263,6 @@
         </div>
       </section>
 
-      <!-- Gallery Section -->
       <section id="gallery" class="py-16 sm:py-24 bg-gray-100">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="text-center mb-12 fade-in-section" data-delay="100">
@@ -295,8 +275,7 @@
             </p>
           </div>
 
-          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            <!-- Gallery Items (11 total) -->
+          <div id="gallery-wrapper" class="gallery-container grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
             <div class="gallery-item fade-in-section" data-delay="100">
               <img
                 src="assets/1.jpeg"
@@ -514,10 +493,11 @@
               />
             </div>
           </div>
+          <button id="showMoreButton">আরও ছবি দেখুন</button>
+          
         </div>
       </section>
 
-      <!-- About Section -->
       <section id="about" class="py-16 sm:py-24 bg-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-4xl mx-auto">
@@ -548,7 +528,6 @@
               </blockquote>
 
               <div class="mt-8 pt-6 border-t border-gray-200 flex items-center">
-                <!-- Director's Photo in About Section -->
                 <img
                   src="assets/sir.png"
                   alt="Md Muksud Wahid"
@@ -576,7 +555,6 @@
         </div>
       </section>
 
-      <!-- Notice Section 2: Important Event / Achievement -->
       <section class="py-12 bg-gray-100">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
           <div
@@ -608,7 +586,6 @@
         </div>
       </section>
 
-      <!-- Contact Section -->
       <section id="contact" class="py-16 sm:py-24">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-4xl mx-auto">
@@ -625,7 +602,6 @@
               class="bg-gray-50 p-8 md:p-12 rounded-2xl shadow-xl flex flex-col lg:flex-row gap-8 fade-in-section"
               data-delay="300"
             >
-              <!-- Contact Info -->
               <div class="lg:w-1/2 space-y-6">
                 <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
                   যোগাযোগের ঠিকানা
@@ -662,7 +638,6 @@
                 </div>
               </div>
 
-              <!-- Contact Form -->
               <div class="lg:w-1/2">
                 <h3 class="text-2xl font-bold text-[var(--primary-color)] mb-4">
                   বার্তা পাঠান
@@ -728,20 +703,17 @@
       </section>
     </main>
 
-    <!-- Lightbox Modal for Gallery -->
     <div
       id="lightbox-modal"
       class="lightbox-modal fixed inset-0 hidden items-center justify-center p-4"
     >
       <div class="relative">
-        <!-- Close Button -->
         <button
           class="absolute top-4 right-4 text-white hover:text-gray-300 transition duration-150"
           onclick="closeLightbox()"
         >
           <i data-lucide="x" class="w-8 h-8"></i>
         </button>
-        <!-- Image -->
         <img
           id="lightbox-image"
           class="lightbox-content rounded-lg shadow-2xl"
@@ -751,7 +723,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p class="text-lg font-semibold mb-2">প্রভাতী বাংলা</p>
@@ -886,6 +857,26 @@
           closeLightbox();
         }
       });
+
+      // 7. Show More/Show Less Gallery Functionality
+      const galleryWrapper = document.getElementById('gallery-wrapper');
+      const showMoreButton = document.getElementById('showMoreButton');
+      
+      if (galleryWrapper && showMoreButton) {
+          const totalItems = galleryWrapper.querySelectorAll('.gallery-item').length;
+          
+          // Only display the button if there are more than 8 images
+          if (totalItems <= 8) {
+              showMoreButton.style.display = 'none';
+          } else {
+              showMoreButton.addEventListener('click', function() {
+                  galleryWrapper.classList.add('show-all');
+                  
+                  // Hide button after click (handled by CSS, but good to ensure)
+                  this.style.display = 'none'; 
+              });
+          }
+      }
 
       // Start the typewriter effect when the window loads
       window.addEventListener("load", () => {

@@ -90,3 +90,35 @@ body {
     max-width: 90vw;
     object-fit: contain;
 }
+
+/* =======================================
+ * FIXED CSS FOR SHOW MORE GALLERY
+ * =======================================
+ */
+
+/* 1. Hide the gallery items starting from the 9th child by default. */
+.gallery-container .gallery-item:nth-child(n + 9) {
+    display: none;
+}
+
+/* 2. When the 'show-all' class is active on the container, show all items. */
+.gallery-container.show-all .gallery-item:nth-child(n + 9) {
+    /* Set display to block to ensure compatibility with grid layout (assuming base grid items are blocks) */
+    display: block; 
+}
+
+/* 3. Style the "Show More" button */
+#showMoreButton {
+    /* Use Tailwind classes for quick styling, since Tailwind is loaded */
+    @apply 
+        bg-[var(--primary-color)] hover:bg-[#d94a0a] text-white 
+        font-bold py-3 px-8 rounded-full shadow-lg transform 
+        hover:scale-105 transition duration-300
+        block w-48 mx-auto mt-8 cursor-pointer text-center;
+}
+
+/* 4. Hide the "Show More" button when the 'show-all' class is active */
+.gallery-container.show-all + #showMoreButton {
+    /* The button will only show if the element before it is NOT show-all */
+    display: none;
+}
