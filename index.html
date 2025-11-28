@@ -14,7 +14,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="cute.css" />
   </head>
   <body>
     <header class="sticky top-0 z-50 bg-white shadow-md">
@@ -493,8 +493,13 @@
               />
             </div>
           </div>
-          <button id="showMoreButton">আরও ছবি দেখুন</button>
-          
+          <button 
+            id="showMoreButton" 
+            class="bg-[var(--primary-color)] hover:bg-[#d94a0a] text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300 block w-48 mx-auto mt-8 cursor-pointer text-center"
+          >
+            আরও ছবি দেখুন
+          </button>
+
         </div>
       </section>
 
@@ -858,7 +863,7 @@
         }
       });
 
-      // 7. Show More/Show Less Gallery Functionality
+      // 7. Show More/Show Less Gallery Functionality (ADDED)
       const galleryWrapper = document.getElementById('gallery-wrapper');
       const showMoreButton = document.getElementById('showMoreButton');
       
@@ -866,13 +871,14 @@
           const totalItems = galleryWrapper.querySelectorAll('.gallery-item').length;
           
           // Only display the button if there are more than 8 images
+          // The button is styled as 'block' by default via its class attribute
           if (totalItems <= 8) {
               showMoreButton.style.display = 'none';
           } else {
               showMoreButton.addEventListener('click', function() {
                   galleryWrapper.classList.add('show-all');
                   
-                  // Hide button after click (handled by CSS, but good to ensure)
+                  // Hide button after click
                   this.style.display = 'none'; 
               });
           }
